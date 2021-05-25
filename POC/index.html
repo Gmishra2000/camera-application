@@ -40,8 +40,9 @@
                  audioElem.srcObject = stream;
                 // can be displayed through webrtc, or can be sent to anyone
                 // Browser
-                mediarecordingObjectForCurrStream = new MediaRecorder(stream);
+                mediarecordingObjectForCurrStream = new MediaRecorder(stream); //makes a new object on which we are using different functions, API object
                 // camera recording add -> recording array
+                // this works when we call the start button
                 mediarecordingObjectForCurrStream.ondataavailable = function(e) {
                     recording.push(e.data);
                 }

@@ -1,0 +1,62 @@
+let videoElem = document.querySelector("video");
+let audioElem = document.querySelector("audio");
+// 1.
+let recordBtn = document.querySelector(".record");
+let isRecording = false;
+// user requirement send
+
+let constraint = {
+    audio: true, video: true
+}
+// represents future recording
+let recording = [];
+let mediarecordingObjectForCurrStream;
+// Promise
+// The navigator represents the state and identity of the browser (i.e. the user-agent) as it exists on the web.
+let userMediaPromise = navigator.mediaDevices.getUserMedia(constraint);
+//  Returns a promise on passing navigator getMedia function 
+// Brings the stream on UI
+userMediaPromise.
+    then(function (stream) {
+
+        videoElem.srcObject = stream;
+        // audioElem.srcObject = stream;
+        // can be displayed through webrtc, or can be sent to anyone
+        // Browser
+        mediarecordingObjectForCurrStream = new MediaRecorder(stream); //makes a new object on which we are using different functions, API object
+        // camera recording add -> recording array
+        // this works when we call the start button
+        mediarecordingObjectForCurrStream.ondataavailable = function (e) {
+            recording.push(e.data);
+        }
+        // download
+        mediarecordingObjectForCurrStream.onstop = function () {
+            // recording -> url convert
+            // type-> MIME type
+            const blob = new Blob(recording, { type: 'video/mp4' });
+            const url = window.URL.createObjectURL(blob);
+            let a = document.createElement("a");
+            a.download = 'file.mp4';
+            a.href = url;
+            a.click();
+            recording = [];
+        }
+
+    }).catch(function (err) {
+        alert("Please allow both microphone and camera")
+    });
+
+recordBtn.addEventListener("click", function () {
+    if (mediarecordingObjectForCurrStream == undefined) {
+        alert("First select the devices");
+        return;
+    }
+    if (isRecording == false) {
+        mediarecordingObjectForCurrStream.start();
+        recordBtn.innerText = "Recording......";
+    } else {
+        mediarecordingObjectForCurrStream.stop();
+        recordBtn.innerText = "Record";
+    }
+    isRecording = !isRecording;
+})
