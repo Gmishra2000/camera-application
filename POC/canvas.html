@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Canvas Board</h1>
+    <canvas class="board"></canvas>
+    <script>
+        let board = document.querySelector(".board");
+        // tool
+        let tool = board.getContext("2d");
+        board.height = window.innerHeight;
+        board.width = window.innerWidth;
+        // x, y width.height
+        // default color -> black
+        // color 
+        // fill -> area fill
+
+        tool.fillStyle = "lightgreen";
+        tool.fillRect(0, 0, window.innerWidth / 2, window.innerHeight / 2);
+        // stroke -> outline draw
+        tool.strokeStyle = "yellow";
+        tool.lineWidth = 10;
+        tool.strokeRect(10, 10, window.innerWidth / 2, window.innerHeight / 2);
+        tool.fillStyle ="red";
+        tool.fillRect(40,40,window.innerWidth / 2, window.innerHeight / 2)
+    </script>
+</body>
+</html>
