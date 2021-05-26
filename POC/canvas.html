@@ -8,15 +8,44 @@
 </head>
 <style>
     body {
-        background-color: lightblue;
+        /* background-color: lightblue; */
         margin: 0px;
     }
     .colors {
-        
+        width: 80vw;
+        height: 5rem;
+        border: 2px solid;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .color{
+        height: 70%;
+        width: 20%;
+    }
+
+    .red {
+        background-color: lightcoral;
+    }
+
+    .green {
+        background-color: lightgreen;
+    }
+
+    .blue {
+        background-color: lightblue;
     }
 </style>
 <body>
-    <h1>Canvas Board</h1>
+    <!-- Canvas tuts -->
+    <div class="colors">
+        <div class="color red"></div>
+        <div class="color green"></div>
+        <div class="color blue"></div>
+    </div>
+    <!-- <h1>Canvas Board</h1> -->
     <canvas class="board"></canvas>
     <script>
         let board = document.querySelector(".board");
@@ -29,57 +58,62 @@
         // color 
         // fill -> area fill
 
-        tool.fillStyle = "lightgreen";
-         // x, y width.height
-        tool.fillRect(0, 0, window.innerWidth / 2, window.innerHeight / 2);
-        // stroke -> outline draw
-        tool.strokeStyle = "yellow";
-        tool.lineWidth = 10;
-        // tool.strokeRect(10, 10, window.innerWidth / 2, window.innerHeight / 2);
-        tool.beginPath();
-        tool.moveTo(100,100);
-        tool.lineTo(200, 50);
-        tool.lineTo(200,200);
-        tool.moveTo(50,300);
-        tool.lineTo(200,300);  // Now the cursor position will be at (200,300)
+        // tool.fillStyle = "lightgreen";
+        //  // x, y width.height
+        // tool.fillRect(0, 0, window.innerWidth / 2, window.innerHeight / 2);
+        // // stroke -> outline draw
+        // tool.strokeStyle = "yellow";
+        // tool.lineWidth = 10;
+        // // tool.strokeRect(10, 10, window.innerWidth / 2, window.innerHeight / 2);
+        // tool.beginPath();
+        // tool.moveTo(100,100);
+        // tool.lineTo(200, 50);
         // tool.lineTo(200,200);
-        tool.stroke();
-        // new path
-        tool.beginPath();
-        tool.moveTo(200, 200);
-        tool.lineTo(200,300);
-        tool.moveTo(53, 300);
-        tool.lineTo(101,100);
-        tool.strokeStyle ="red";
-        tool.lineWidth = 5;
-        tool.stroke(); // this will render everything on ui
+        // tool.moveTo(50,300);
+        // tool.lineTo(200,300);  // Now the cursor position will be at (200,300)
+        // // tool.lineTo(200,200);
+        // tool.stroke();
+        // // new path
+        // tool.beginPath();
+        // tool.moveTo(200, 200);
+        // tool.lineTo(200,300);
+        // tool.moveTo(53, 300);
+        // tool.lineTo(101,100);
+        // tool.strokeStyle ="red";
+        // tool.lineWidth = 5;
+        // tool.stroke(); // this will render everything on ui
         
         // tool.strokeRect(10, 10, window.innerWidth / 2, window.innerHeight / 2);
         // tool.fillStyle ="red";
         // tool.fillRect(40,40,window.innerWidth / 2, window.innerHeight / 2)
 
-        // let isDown =false;
-        // board.addEventListener("mousedown", function (e) {
-        //     console.log(e);
-        //     tool.beginPath();
-        //     tool.moveTo(e.clientX, e.clientY);
-        //     isDown = true;
-        // })
 
-        // board.addEventListener('mousemove', function(e) {
-        //     console.log("MOve to");
-        //     if(isDown == true) {
-        //         tool.lineTo(e.clientX, e.clientY);
-        //         tool.stroke();
-        //     }
-        // })
+        // drawing
 
-        // // event
-        // board.addEventListener("mouseup", function (e) {
-        //     tool.lineTo(e.clientX, e.clientY);
-        //     tool.stroke();
-        //     isDown = false;
-        // })
+
+        let isDown =false; // this will allow to make line once we want to resume from the point we had left
+        board.addEventListener("mousedown", function (e) {
+            console.log(e);
+            tool.beginPath();
+            tool.moveTo(e.clientX, e.clientY);
+            isDown = true;
+        })
+
+        board.addEventListener('mousemove', function(e) {
+            console.log("Move to");
+            if(isDown == true) {
+                tool.lineTo(e.clientX, e.clientY);
+                tool.stroke();
+            }
+        })
+
+         // event
+        // these event allows to draw a linwe bwteen two points by using mouse pointer
+        board.addEventListener("mouseup", function (e) {
+            tool.lineTo(e.clientX, e.clientY);
+            tool.stroke();
+            isDown = false;
+        })
     </script>
 </body>
 </html>

@@ -11,3 +11,6 @@
 
 **Browser Theory**
 - https://www.youtube.com/results?search_query=steve+griffith
+
+**Drwaing line using Mouse events**
+https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event
