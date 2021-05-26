@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    body {
+        background-color: lightblue;
+        margin: 0px;
+    }
+    .colors {
+        
+    }
+</style>
 <body>
     <h1>Canvas Board</h1>
     <canvas class="board"></canvas>
@@ -15,19 +24,62 @@
         let tool = board.getContext("2d");
         board.height = window.innerHeight;
         board.width = window.innerWidth;
-        // x, y width.height
+        
         // default color -> black
         // color 
         // fill -> area fill
 
         tool.fillStyle = "lightgreen";
+         // x, y width.height
         tool.fillRect(0, 0, window.innerWidth / 2, window.innerHeight / 2);
         // stroke -> outline draw
         tool.strokeStyle = "yellow";
         tool.lineWidth = 10;
-        tool.strokeRect(10, 10, window.innerWidth / 2, window.innerHeight / 2);
-        tool.fillStyle ="red";
-        tool.fillRect(40,40,window.innerWidth / 2, window.innerHeight / 2)
+        // tool.strokeRect(10, 10, window.innerWidth / 2, window.innerHeight / 2);
+        tool.beginPath();
+        tool.moveTo(100,100);
+        tool.lineTo(200, 50);
+        tool.lineTo(200,200);
+        tool.moveTo(50,300);
+        tool.lineTo(200,300);  // Now the cursor position will be at (200,300)
+        // tool.lineTo(200,200);
+        tool.stroke();
+        // new path
+        tool.beginPath();
+        tool.moveTo(200, 200);
+        tool.lineTo(200,300);
+        tool.moveTo(53, 300);
+        tool.lineTo(101,100);
+        tool.strokeStyle ="red";
+        tool.lineWidth = 5;
+        tool.stroke(); // this will render everything on ui
+        
+        // tool.strokeRect(10, 10, window.innerWidth / 2, window.innerHeight / 2);
+        // tool.fillStyle ="red";
+        // tool.fillRect(40,40,window.innerWidth / 2, window.innerHeight / 2)
+
+        // let isDown =false;
+        // board.addEventListener("mousedown", function (e) {
+        //     console.log(e);
+        //     tool.beginPath();
+        //     tool.moveTo(e.clientX, e.clientY);
+        //     isDown = true;
+        // })
+
+        // board.addEventListener('mousemove', function(e) {
+        //     console.log("MOve to");
+        //     if(isDown == true) {
+        //         tool.lineTo(e.clientX, e.clientY);
+        //         tool.stroke();
+        //     }
+        // })
+
+        // // event
+        // board.addEventListener("mouseup", function (e) {
+        //     tool.lineTo(e.clientX, e.clientY);
+        //     tool.stroke();
+        //     isDown = false;
+        // })
     </script>
 </body>
 </html>
