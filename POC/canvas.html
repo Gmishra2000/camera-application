@@ -92,17 +92,30 @@
 
 
         let isDown =false; // this will allow to make line once we want to resume from the point we had left
+       // default color
+        tool.strokeStyle = "red";
+        let colors = document.querySelectorAll(".color");
+        let colorContainer = document.querySelector(".colors");
+        for(let i = 0; i < colors.length;i++){
+            colors[i].addEventListener("click", function() {
+                let newColor = colors[i].classList[1];
+                
+                tool.strokeStyle = "light" + newColor;
+            })
+        }
+       
+         
         board.addEventListener("mousedown", function (e) {
             console.log(e);
             tool.beginPath();
-            tool.moveTo(e.clientX, e.clientY);
+            tool.moveTo(e.clientX, getY(e.clientY));
             isDown = true;
         })
 
         board.addEventListener('mousemove', function(e) {
             console.log("Move to");
             if(isDown == true) {
-                tool.lineTo(e.clientX, e.clientY);
+                tool.lineTo(e.clientX, getY(e.clientY));
                 tool.stroke();
             }
         })
@@ -110,10 +123,17 @@
          // event
         // these event allows to draw a linwe bwteen two points by using mouse pointer
         board.addEventListener("mouseup", function (e) {
-            tool.lineTo(e.clientX, e.clientY);
-            tool.stroke();
+            // tool.lineTo(e.clientX, e.clientY);
+            // tool.stroke();
             isDown = false;
         })
+
+        // to minus the content of colors div height from mouse pointer where we are placing
+        function getY(originalY) {
+            let obj = colorContainer.getBoundingClientRect(); // gives the height from origin
+            let height = obj.height;
+            return originalY - obj.height;
+        }
     </script>
 </body>
 </html>
