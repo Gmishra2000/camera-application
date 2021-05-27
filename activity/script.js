@@ -5,8 +5,11 @@ let recordBtn = document.querySelector(".record");
 let captureImgBtn = document.querySelector(".click-image");
 let filterArr = document.querySelectorAll(".filter");
 let filterOverlay = document.querySelector(".filter_overlay");
+let timings = document.querySelector(".timing");
 let filterColor = "";
 let isRecording = false;
+let counter = 0;
+let clearObj ;
 // user requirement send
 
 let constraint = {
@@ -59,7 +62,9 @@ recordBtn.addEventListener("click", function () {
     if (isRecording == false) {
         mediarecordingObjectForCurrStream.start();
         recordBtn.innerText = "Recording......";
+        startTimer();
     } else {
+        stopTimer();
         mediarecordingObjectForCurrStream.stop();
         recordBtn.innerText = "Record";
     }
@@ -94,4 +99,25 @@ for(let i = 0; i < filterArr.length; i++){
         filterColor = filterArr[i].style.backgroundColor;
         filterOverlay.style.backgroundColor = filterColor;
     })
+}
+
+function startTimer() {
+    timings.style.display = "block";
+    function fn() {
+        let hours = Number.parseInt(counter/3600);
+        let RemSeconds = counter % 3600;
+        let mins = Number.parseInt(RemSeconds / 60);
+        let seconds = RemSeconds % 60;
+        hours = hours < 10 ? `0${hours}` : hours;
+        mins = mins < 10 ? `0${mins}` : `${mins}`;
+        seconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+        timings.innerText = `${hours}:${mins}:${seconds}`;
+        counter++;
+    }
+    clearObj = setInterval(fn, 1000);
+}
+
+function stopTimer() {
+    timings.style.display = "none";
+    clearInterval(clearObj);
 }

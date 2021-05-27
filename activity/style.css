@@ -83,7 +83,7 @@ body {
     height: 17rem;
     width: 7rem;
     position: fixed;
-    top: calc((100vh - 17rem )/2);
+    top: calc( (100vh - 17rem)/2);
     left: 10vw;
     background-color: red;
     z-index: 4;
@@ -97,4 +97,15 @@ body {
     background-image: url(https://picsum.photos/200/300);
     /* width of the background image */
     background-size: 100%;
+}
+
+.timing {
+    color: white;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    position: fixed;
+    bottom: 17vh;
+    left: 10vw;
+    display: none;
+    z-index: 6;
 }
